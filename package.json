@@ -1,0 +1,30 @@
+{
+  "name": "my-chord-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:clean": "rimraf build",
+    "dev": "parcel src/index.html --out-dir build",
+    "dev:o": "parcel src/index.html --out-dir build --open",
+    "start": "npm run dev:clean && npm run dev:o",
+    "prebuild": "rimraf build/dist",
+    "build": "parcel build src/index.html --out-dir build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayrgee/my-chord-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayrgee/my-chord-app/issues"
+  },
+  "homepage": "https://github.com/jayrgee/my-chord-app#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "rimraf": "^2.6.3"
+  }
+}
