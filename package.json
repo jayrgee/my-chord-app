@@ -24,7 +24,10 @@
   },
   "homepage": "https://github.com/jayrgee/my-chord-app#readme",
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
     "parcel-bundler": "^1.12.3",
+    "parcel-plugin-eslint": "^1.0.7",
     "rimraf": "^2.6.3"
   },
   "dependencies": {

@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring, comma-dangle  */
 import { ChordBox } from 'vexchords';
 import chordChart from './mickeyb.json';
 
@@ -15,13 +14,12 @@ function createChordElement(chordStruct) {
 
   const position = chordStruct.position || 0;
   const positionText = chordStruct.positionText || 0;
-  // eslint-disable-next-line no-nested-ternary
   const offset =
     positionText > 0
       ? position - positionText - 1
       : position > 0
-      ? position - 1
-      : position;
+        ? position - 1
+        : position;
 
   const newChord = {
     el: chordcanvas[0],
