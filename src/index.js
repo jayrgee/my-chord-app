@@ -1,1 +1,4 @@
-console.log('my-chord-app lives!')
+import chordChart from './chordCharts/mickeyb.json';
+import { renderChords } from './render-chords';
+
+window.chords = renderChords(chordChart);
