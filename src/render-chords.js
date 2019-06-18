@@ -1,16 +1,24 @@
 import { ChordBox } from 'vexchords';
 
-export function renderChords (chordChart) {
+export function renderChords(chordChart) {
   const chords = [];
 
   function createChordElement(chordStruct) {
-    const chordbox = $('<div>').addClass('chord');
-    const chordcanvas = $('<div>');
-    const chordname = $('<div>').addClass('chordname');
-    const heading = $('<h3>').append(chordStruct.name);
-    const number = $('<span>')
-      .addClass('chordlabel')
-      .append(chordStruct.number);
+
+    const chordbox = document.createElement('div');
+    chordbox.setAttribute('class', 'chord');
+
+    const chordCanvas = document.createElement('div');
+
+    const chordName = document.createElement('div');
+    chordName.setAttribute('class','chordname');
+
+    const chordHeading = document.createElement('h3');
+    chordHeading.innerText = chordStruct.name;
+
+    const chordLabel = document.createElement('span');
+    chordLabel.setAttribute('class', 'chordlabel');
+    chordLabel.innerText = chordStruct.number;
 
     const position = chordStruct.position || 0;
     const positionText = chordStruct.positionText || 0;
@@ -22,7 +30,7 @@ export function renderChords (chordChart) {
           : position;
 
     const newChord = {
-      el: chordcanvas[0],
+      el: chordCanvas,
       struct: chordStruct,
       frets: chordStruct.chord
         .map(x => x[1]) // assumes chord string order is 1,2,3,4,5,6
@@ -32,46 +40,53 @@ export function renderChords (chordChart) {
 
     chords.push(newChord);
 
-    const chordnotes = $('<p>')
-      .addClass('chordfrets')
-      .append(newChord.frets.toString());
+    const chordnotes = document.createElement('p');
+    chordnotes.setAttribute('class', 'chordfrets');
+    chordnotes.innerText = newChord.frets.toString();
 
-    chordname.append(number);
-    chordname.append(heading);
-    chordbox.append(chordname);
-    chordbox.append(chordcanvas);
-    chordbox.append(chordnotes);
+    chordName.insertBefore(chordLabel, null);
+    chordName.insertBefore(chordHeading, null);
+    chordbox.insertBefore(chordName, null);
+    chordbox.insertBefore(chordCanvas, null);
+    chordbox.insertBefore(chordnotes, null);
 
     return chordbox;
   }
 
   function createSectionElement(sectionStruct) {
-    const section = $('<div>').addClass('section');
-    const sectionTitle = $('<div>').addClass('title');
-    const sectionDesc = $('<div>').addClass('description');
 
-    section.append(sectionTitle);
-    section.append(sectionDesc);
-    sectionTitle.append(sectionStruct.section);
-    sectionDesc.append(sectionStruct.description);
+    const section = document.createElement('div');
+    section.setAttribute('class', 'section');
+    
+    const sectionTitle = document.createElement('div');
+    sectionTitle.setAttribute('class', 'title');
+    sectionTitle.innerText = sectionStruct.section;
+    
+    const sectionDesc = document.createElement('div');
+    sectionDesc.setAttribute('class', 'description');
+    sectionDesc.innerText = sectionStruct.description;
+
+    section.insertBefore(sectionTitle, null);
+    section.insertBefore(sectionDesc, null);
 
     return section;
   }
 
-
   function init() {
     chords.length = 0;
 
-    const container = $('#container');
+    const container = document.getElementById('container');
 
     // Display chordChart
     const { title, description, sections } = chordChart;
 
-    const titleElement = $('<h1>').append(title);
-    container.append(titleElement);
+    const titleElement = document.createElement('h1');
+    titleElement.innerText = title;
+    container.insertBefore(titleElement, null);
 
-    const descElement = $('<p>').append(description);
-    container.append(descElement);
+    const descElement = document.createElement('p');
+    descElement.innerText = description;
+    container.insertBefore(descElement, null);
 
     for (let i = 0; i < sections.length; i += 1) {
       const sectionStruct = sections[i];
@@ -81,7 +96,7 @@ export function renderChords (chordChart) {
         section.append(createChordElement(sectionStruct.chords[j], j + 1));
       }
 
-      container.append(section);
+      container.insertBefore(section, null);
     }
 
     // Render chords
